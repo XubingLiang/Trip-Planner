@@ -29,7 +29,7 @@ public class State<E> implements Comparable<State<E>>{
 		String toPrint = getPathString("");
 		String s="London"+"\n";
 		toPrint=toPrint.substring(s.length());
-		System.out.println("Cost = " + calculateFCost() + "\n"+toPrint);
+		System.out.println("Cost = " + this.getgCost() + "\n"+toPrint);
 	}
 	
 	
@@ -60,6 +60,9 @@ public class State<E> implements Comparable<State<E>>{
 
 	public int getfCost() {
 		return fCost;
+	}
+	public void sethCost(int hcost){
+		this.hCost=hcost;
 	}
 
 	public void setfCost(int fCost) {

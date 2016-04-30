@@ -41,6 +41,14 @@ public class City<E>{
 		return name;
 	}
 
+	public int getEdgeCost(City<E> to){
+		for(Edge<E> e:edge){
+			if(to==e.getTo()){
+				return e.getCost();
+			}
+		}
+		return 0;
+	}
 
 	public ArrayList<Edge<E>> getEdge() {
 		return edge;

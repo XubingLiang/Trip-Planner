@@ -36,6 +36,7 @@ public class Edge<E> {
 	public int getCost() {
 		return cost;
 	}
+	
 
 	public City<E> getFrom() {
 		return from;
