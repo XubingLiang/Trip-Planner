@@ -21,12 +21,14 @@ public class TripPlanner {
 	        	  }else if (input[0].equals("Time")){
 	        		  	planner.addconnection(input);
 	        	  }else if(input[0].equals("Trip")){
-	        		  
+	        		  	planner.addtrip(input);
 	        	  }	     
 	        
 	          }
 	          planner.initStartCity();
-	          planner.getMap().test();
+	          //planner.getMap().test();
+	          planner.getMap().aStarSearch();
+	          planner.getMap().printresult();
 	      }
 	      catch (FileNotFoundException e) {
 	    	  System.out.println(e);
@@ -37,6 +39,12 @@ public class TripPlanner {
 	      }	      
 	}
 	
+	private void addtrip(String[] input) {
+		City<String> from= map.getaCity(input[1]);
+		City<String> to=map.getaCity(input[2]);
+		map.addTrip(from, to);
+		
+	}
 	public Map<String> getMap () {
 		return this.map;
 	}
@@ -60,6 +68,8 @@ public class TripPlanner {
 		City<String> start = map.getaCity("London");
 		this.getMap().setStartCity(start);
 	}
+	
+	
 	
 	
 

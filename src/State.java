@@ -1,14 +1,16 @@
 
-public class State<E extends Comparable<E>> implements Comparable<State<E>>{
+public class State<E> implements Comparable<State<E>>{
 	private City<E> currentNode;
 	private State<E> pState;
 	private int gCost;
 	private int hCost;
+	private int fCost;
 	
 	public State(City<E> node, int costsoFar, State<E> pState){
 		this.currentNode=node;
 		this.pState=pState;
 		this.gCost=costsoFar;
+		this.setfCost(calculateFCost());
 	}
 	
 	public void printCurrentPath(){
@@ -17,22 +19,24 @@ public class State<E extends Comparable<E>> implements Comparable<State<E>>{
 	}
 	
 	private String getPathString(String s){
-		String returnString = this.currentNode.toString().concat(s);
+		String returnString =this.currentNode.getName().toString().concat(s);
 		if(this.pState!=null){
-			return pState.getPathString("->"+returnString);
+			return pState.getPathString("\n"+"Trip "+pState.getCurrentNode().getName()+" to "+returnString);
 		}
 		return returnString;
 	}
 	public void printCurrentPathAndCosts() {
 		String toPrint = getPathString("");
-		System.out.println(toPrint + " fCost = " + calculateFCost() + " gCost = " + gCost + " hCost = " + currentNode.getTransfer());
+		String s="London"+"\n";
+		toPrint=toPrint.substring(s.length());
+		System.out.println("Cost = " + calculateFCost() + "\n"+toPrint);
 	}
+	
 	
 	public City<E> getCurrentNode() {
 		return currentNode;
 	}
 
-	@Override
 	public int compareTo(State<E> o) {
 		return calculateFCost() - o.calculateFCost();
 	}
@@ -40,6 +44,11 @@ public class State<E extends Comparable<E>> implements Comparable<State<E>>{
 	public int calculateFCost(){
 		return gCost+hCost;
 	}
+	
+	public State<E> getPstate (){
+		return pState;
+	}
+	
 
 	public int getgCost() {
 		return gCost;
@@ -48,6 +57,15 @@ public class State<E extends Comparable<E>> implements Comparable<State<E>>{
 	public void setgCost(int gCost) {
 		this.gCost = gCost;
 	}
+
+	public int getfCost() {
+		return fCost;
+	}
+
+	public void setfCost(int fCost) {
+		this.fCost = fCost;
+	}
+	
 	
 	
 }

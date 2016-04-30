@@ -1,4 +1,4 @@
 
 public interface heuristic<E> {
-	public int getestimate(E e);
+	public int getEstimateHCost(E e);
 }
