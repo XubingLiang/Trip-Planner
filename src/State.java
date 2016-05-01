@@ -1,5 +1,6 @@
 
 public class State<E> implements Comparable<State<E>>{
+	private Trip<E> currentTrip;
 	private City<E> currentNode;
 	private State<E> pState;
 	private int gCost;
@@ -10,7 +11,6 @@ public class State<E> implements Comparable<State<E>>{
 		this.currentNode=node;
 		this.pState=pState;
 		this.gCost=costsoFar;
-		this.setfCost(calculateFCost());
 	}
 	
 	public void printCurrentPath(){
@@ -42,7 +42,7 @@ public class State<E> implements Comparable<State<E>>{
 	}
 	
 	public int calculateFCost(){
-		return gCost+hCost;
+		return gCost+this.gethCost();
 	}
 	
 	public State<E> getPstate (){
@@ -57,17 +57,25 @@ public class State<E> implements Comparable<State<E>>{
 	public void setgCost(int gCost) {
 		this.gCost = gCost;
 	}
-
-	public int getfCost() {
-		return fCost;
-	}
+	
 	public void sethCost(int hcost){
 		this.hCost=hcost;
 	}
 
-	public void setfCost(int fCost) {
-		this.fCost = fCost;
+	public int gethCost() {
+		return hCost;
 	}
+	
+	public void setfCost(){
+		fCost=this.calculateFCost();
+	}
+	
+	public int getfCost(){
+		return fCost;
+	}
+	
+	
+
 	
 	
 	

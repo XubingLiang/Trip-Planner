@@ -59,10 +59,10 @@ public class City<E>{
 		return transfer;
 	}
 
-	public void sethCost(int hCost) {
-		this.transfer = hCost;
+	public void setCost(int Cost) {
+		this.transfer = Cost;
 	}
-
+	
 
 
 	
