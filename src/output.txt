@@ -1,3 +1,39 @@
+start city is London
+conntection of London
+from London to Paris cost is 180
+from London to Berlin cost is 240
+from London to Amsterdam cost is 180
+from London to Brussels cost is 100
+
+conntection of Paris
+from Paris to London cost is 180
+from Paris to Berlin cost is 100
+from Paris to Amsterdam cost is 240
+from Paris to Brussels cost is 120
+
+conntection of Berlin
+from Berlin to London cost is 240
+from Berlin to Paris cost is 100
+from Berlin to Amsterdam cost is 240
+from Berlin to Brussels cost is 220
+
+conntection of Amsterdam
+from Amsterdam to London cost is 180
+from Amsterdam to Paris cost is 240
+from Amsterdam to Berlin cost is 240
+from Amsterdam to Brussels cost is 200
+
+conntection of Brussels
+from Brussels to London cost is 100
+from Brussels to Paris cost is 120
+from Brussels to Berlin cost is 220
+from Brussels to Amsterdam cost is 200
+
+From Berlin to Amsterdam
+From Paris to Berlin
+From London to Amsterdam
+From London to Brussels
+1060
 895
 Cost = 100
 Trip London to Brussels

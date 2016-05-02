@@ -43,7 +43,7 @@ public class TripPlanner<E> {
 	        
 	          }
 	          planner.initStartCity();
-	          //planner.test();
+	          planner.test();
 	          planner.aStarSearch();
 	          planner.printresult();
 	      }
@@ -156,17 +156,18 @@ public class TripPlanner<E> {
 	public void aStarSearch(){
 		State<E> iniState = new State<E>(this.startCity,0,null);
 		PriorityQueue<State<E>> stateQueue = new PriorityQueue<State<E>>();
-		iniState.sethCost(h.getEstimateHCost(this.trips,iniState));
+		int cost=this.getTripsCost();
+		iniState.sethCost(h.getEstimateHCost(this.trips,iniState,cost));
 		iniState.setfCost();
-		System.out.println(iniState.gethCost());
+		//System.out.println(iniState.getfCost());
 		stateQueue.add(iniState);
 		int nodes=0;
 		while(stateQueue.size()>0){
 			State<E> currentState=stateQueue.poll();
 			nodes++;
 			if(currentState.getPstate()!=null){
-				//System.out.println(currentState.getfCost());
-				//currentState.printCurrentPathAndCosts();
+				System.out.println(currentState.getfCost());
+				currentState.printCurrentPathAndCosts();
 			}
 			if(tripsfound(currentState)){
 				this.setFinalState(currentState);
@@ -177,12 +178,15 @@ public class TripPlanner<E> {
 				if(currentState.getPstate()==null){					
 					State<E> newState = new State<E>(e,currentState.getgCost()+
 									currentState.getCurrentNode().getEdge(e).getCost(),currentState);
+					newState.sethCost(h.getEstimateHCost(this.trips,newState,cost));
 					newState.setfCost();
 					stateQueue.add(newState);
 				} else {
 					State<E> newState = new State<E>(e,currentState.getgCost()+currentState.getCurrentNode().getTransfer()+
 							currentState.getCurrentNode().getEdge(e).getCost(),currentState);
+					newState.sethCost(h.getEstimateHCost(this.trips,newState,cost));
 					newState.setfCost();
+					//System.out.println(newState.getfCost());
 					stateQueue.add(newState);
 				}
 			}
@@ -190,7 +194,7 @@ public class TripPlanner<E> {
 	}
 	
 	public boolean tripsfound(State<E> currentState){
-		ArrayList<Trip<E>> triplist=copylist();		
+		ArrayList<Trip<E>> triplist=this.copylist();		
 		Boolean found=false;
 		int i=0;
 		while(currentState.getPstate() !=null){

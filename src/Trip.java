@@ -33,4 +33,6 @@ public class Trip<E> {
 	public void setCost(int cost) {
 		this.cost = cost;
 	}
+	
+
 }
