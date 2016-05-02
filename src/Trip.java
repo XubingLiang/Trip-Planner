@@ -8,10 +8,16 @@ public class Trip<E> {
 	public Trip(City<E> from, City<E> to){
 		this.from=from;
 		this.to=to;
+		setCost();
 	}
 	public City<E> getTo() {
 		return to;
 	}
+	
+	public void setCost(){
+		cost=from.getEdgeCost(to);
+	}
+	
 	public void setTo(City<E> to) {
 		this.to = to;
 	}

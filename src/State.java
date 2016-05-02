@@ -1,6 +1,7 @@
+import java.util.ArrayList;
 
 public class State<E> implements Comparable<State<E>>{
-	private Trip<E> currentTrip;
+	//private Trip<E> currentTrip;
 	private City<E> currentNode;
 	private State<E> pState;
 	private int gCost;
@@ -32,6 +33,15 @@ public class State<E> implements Comparable<State<E>>{
 		System.out.println("Cost = " + this.getgCost() + "\n"+toPrint);
 	}
 	
+	public ArrayList<Trip<E>> gettripsinState(){
+		ArrayList<Trip<E>> temp=new ArrayList<Trip<E>>();
+		while(this.getPstate()!=null){
+			Trip<E> t=new Trip<E>(this.getPstate().getCurrentNode(),this.getCurrentNode());
+			temp.add(t);
+		}
+		return temp;
+	}
+
 	
 	public City<E> getCurrentNode() {
 		return currentNode;

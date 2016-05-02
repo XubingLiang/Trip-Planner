@@ -11,6 +11,7 @@ public class TripPlanner<E> {
 	private ArrayList<Trip<E>> trips;
 	private int nnodes;
 	private City<E> startCity;
+	private BasicHeuristic<E> h=new BasicHeuristic<E>();
 	
 	public TripPlanner (){
 		cities=new ArrayList<City<E>>();
@@ -42,7 +43,7 @@ public class TripPlanner<E> {
 	        
 	          }
 	          planner.initStartCity();
-	          planner.test();
+	          //planner.test();
 	          planner.aStarSearch();
 	          planner.printresult();
 	      }
@@ -80,6 +81,7 @@ public class TripPlanner<E> {
 		this.setStartCity(start);
 	}
 	
+	
 	private void setStartCity(City<E> start) {
 		this.startCity=start;
 		
@@ -89,29 +91,21 @@ public class TripPlanner<E> {
 	
 	public ArrayList<Trip<E>> copylist(){
 		ArrayList<Trip<E>> triplist=new ArrayList<Trip<E>>();
-		for(Trip<E> e : this.getTrips()){
+		for(Trip<E> e : this.trips){
 			triplist.add(e);
 		}
 		return triplist;
 	}
 	
-	public int getNnodes() {
-		return nnodes;
-	}
 	public void setNnodes(int nnodes) {
 		this.nnodes = nnodes;
 	}
-	public State<E> getFinalState() {
-		return finalState;
-	}
+
 	public void setFinalState(State<E> currentState) {
 		this.finalState = currentState;
 	}
 	
-	
-	public ArrayList<Trip<E>> getTrips() {
-		return trips;
-	}
+
 
 	
 	public int getTripsCost(){
@@ -123,8 +117,8 @@ public class TripPlanner<E> {
 	}
 
 	public void test(){
-		System.out.println("start city is "+this.getStartCity().getName());
-		for(City<E> c: this.getCities()){
+		System.out.println("start city is "+this.startCity.getName());
+		for(City<E> c: this.cities){
 			System.out.println("conntection of "+c.getName());
 			for(Edge<E> e:c.getEdge()){
 				System.out.println("from " + e.getFrom().getName()+" to "+e.getTo().getName()+" cost is "+e.getCost());
@@ -133,18 +127,16 @@ public class TripPlanner<E> {
 		}
 		for(Trip<E> t: this.trips){
 			System.out.println("From "+ t.getFrom().getName() +" to "+ t.getTo().getName());
+			
 		}
+		System.out.println(this.getTripsCost());
 		
 		
 	}
-	private City<E> getStartCity() {
-		return this.startCity;
-	}
 
 
-	private ArrayList<City<E>> getCities() {
-		return this.cities;
-	}
+
+
 
 
 	public void addEdge(City<E> from, City<E> to, int c) {
@@ -152,29 +144,30 @@ public class TripPlanner<E> {
 	}
 	
 	public City<E> getaCity(String name){
-		City<E> city = null;
 		for(City<E> c: cities){
 			if(c.getName().equals(name)){
-				city= c;
+				return c;
 			}
 		}
-		return city;
+		return null;
 	}
 	
 	
 	public void aStarSearch(){
-		State<E> iniState = new State<E>(this.getStartCity(),0,null);
+		State<E> iniState = new State<E>(this.startCity,0,null);
 		PriorityQueue<State<E>> stateQueue = new PriorityQueue<State<E>>();
-		//iniState.sethCost(h.getEstimateHCost(i, this.getTrips().size(), c));
+		iniState.sethCost(h.getEstimateHCost(this.trips,iniState));
+		iniState.setfCost();
+		System.out.println(iniState.gethCost());
 		stateQueue.add(iniState);
 		int nodes=0;
 		while(stateQueue.size()>0){
 			State<E> currentState=stateQueue.poll();
 			nodes++;
-			/*if(currentState.getPstate()!=null){
-				System.out.println(currentState.getfCost());
-				currentState.printCurrentPathAndCosts();
-			}*/
+			if(currentState.getPstate()!=null){
+				//System.out.println(currentState.getfCost());
+				//currentState.printCurrentPathAndCosts();
+			}
 			if(tripsfound(currentState)){
 				this.setFinalState(currentState);
 				this.setNnodes(nodes);
@@ -223,8 +216,8 @@ public class TripPlanner<E> {
 	}
 	
 	public void printresult(){
-		System.out.print(this.getNnodes()+" nodes expanded\n");
-		State<E> s = this.getFinalState();
+		System.out.print(this.nnodes+" nodes expanded\n");
+		State<E> s = this.finalState;
 		s.printCurrentPathAndCosts();
 	}
 

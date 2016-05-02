@@ -1,17 +1,25 @@
 import java.util.ArrayList;
 
-public class BasicHeuristic implements heuristic {
+public class BasicHeuristic<E> implements heuristic<E> {
 	
 	public BasicHeuristic (){
 	}
 
-	public int getEstimateHCost(int i,int size,int cost) {
-		int mincost=cost;
-		int num=size;
-		int hcost=0;
-		hcost=mincost*(num-i)/size;
-		return hcost;
+	public int getEstimateHCost(ArrayList<Trip<E>> trips,State<E> s) {
+		int hCost=0;
+		if(s.getPstate()==null){
+			for(Trip<E> t : trips){
+				hCost += t.getCost();
+			}
+		}else {
+			while(s.getPstate()!=null){
+				ArrayList<Trip<E>> temp=new ArrayList<Trip<E>>();
+			}
+		}
+		
+		return hCost;
 	}
+	
 	
 
 
