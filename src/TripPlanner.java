@@ -10,9 +10,9 @@ import java.util.Scanner;
  * that required
  * taking control of use input and return planned trip to user
  *
- * @author Xubing Liang
+ * @author Xubing Liang z5039153
  *
- * @param <E>
+ * @param <E>  generic type
  */
 public class TripPlanner<E> {
 	
@@ -21,7 +21,7 @@ public class TripPlanner<E> {
 	private ArrayList<Trip<E>> trips;
 	private int nnodes;
 	private City<E> startCity;
-	private LegitHeuristic<E> h=new LegitHeuristic<E>();
+	private LegitHeuristic<E> heuristic=new LegitHeuristic<E>();
 	
 	/**
 	 * constructor for Tripplanner
@@ -33,14 +33,14 @@ public class TripPlanner<E> {
 	
 	/**
 	 * the main function
-	 * @param args
+	 * @param args  String[]
 	 */
 	public static void main(String[] args){
 		Scanner sc = null;
 		String[] input;
 		TripPlanner<String> planner=new TripPlanner<String>();
 	      try {
-	          sc = new Scanner(new FileReader("input.txt")); 
+	          sc = new Scanner(new FileReader(args[0])); 
 	          while (sc.hasNextLine()){
 	        	  input=sc.nextLine().split(" ");
 	        	  if(input[0].equals("Transfer")){ 
@@ -73,7 +73,7 @@ public class TripPlanner<E> {
 	
 	/**
 	 * method to initialize City information
-	 * @param n
+	 * @param n  city
 	 */
 	
 	public void cityInit(City<E> n){
@@ -82,7 +82,7 @@ public class TripPlanner<E> {
 		
 	/**
 	 * method to add required trip
-	 * @param t
+	 * @param Trip t
 	 */
 	private void addtrip(Trip<E> t) {
 		trips.add(t);
@@ -91,7 +91,7 @@ public class TripPlanner<E> {
 	
 	/**
 	 * method to add connection between two cities
-	 * @param input
+	 * @param input String[]
 	 */
 	
 	private void addconnection(String[] input) {
@@ -114,7 +114,7 @@ public class TripPlanner<E> {
 	
 	/**
 	 * method to set the start city
-	 * @param start
+	 * @param start  start city<E>
 	 */
 	private void setStartCity(City<E> start) {
 		this.startCity=start;
@@ -137,7 +137,7 @@ public class TripPlanner<E> {
 	
 	/**
 	 * method to set how many nodes expanded for the search
-	 * @param nnodes
+	 * @param nnodes  number of nodes expanded
 	 */
 	public void setNnodes(int nnodes) {
 		this.nnodes = nnodes;
@@ -145,7 +145,7 @@ public class TripPlanner<E> {
 	
 	/**
 	 * set the final state
-	 * @param currentState
+	 * @param currentState  State current state
 	 */
 
 	public void setFinalState(State<E> currentState) {
@@ -154,9 +154,9 @@ public class TripPlanner<E> {
 	
 	/**
 	 * method to initialize an edge
-	 * @param from
-	 * @param to
-	 * @param c
+	 * @param from start city
+	 * @param to   end city
+	 * @param c    travel cost
 	 */
 
 	public void addEdge(City<E> from, City<E> to, int c) {
@@ -165,8 +165,8 @@ public class TripPlanner<E> {
 	
 	/**
 	 * method to get a city by name
-	 * @param name
-	 * @return
+	 * @param name City anme
+	 * @return  get a exact city
 	 */
 	
 	public City<E> getaCity(String name){
@@ -180,7 +180,7 @@ public class TripPlanner<E> {
 	
 	/**
 	 * return the cheapest cost of a edge in the map
-	 * @return
+	 * @return the smallest travel time in the map
 	 */
 	
 	public int closestEdge(){
@@ -205,7 +205,7 @@ public class TripPlanner<E> {
 		PriorityQueue<State<E>> states = new PriorityQueue<State<E>>();
 		//PriorityQueue<State<E>> tempstates=new PriorityQueue<State<E>>();
 		State<E> tmpState;
-		iniState.sethCost(h.getEstimateHCost(this,iniState));
+		iniState.sethCost(heuristic.getEstimateHCost(this,iniState));
 		iniState.setfCost();
 		states.add(iniState);
 		int nodes=0;
@@ -229,7 +229,7 @@ public class TripPlanner<E> {
 				if(current.getCurrentNode()==from){
 					cost=current.getgCost()+current.getCurrentNode().getEdgeCost(to)+to.getTransfer();
 					newState=new State<E>(to,cost,current);
-					newState.sethCost(h.getEstimateHCost(this,newState));
+					newState.sethCost(heuristic.getEstimateHCost(this,newState));
 					newState.setfCost();
 					states.add(newState);
 				} else if (current.getCurrentNode() != from){
@@ -239,7 +239,7 @@ public class TripPlanner<E> {
 						 +to.getTransfer();
 					tmpState=newState;
 					newState=new State<E>(to,cost,tmpState);
-					newState.sethCost(h.getEstimateHCost(this,newState));
+					newState.sethCost(heuristic.getEstimateHCost(this,newState));
 					newState.setfCost();
 					states.add(newState);
 				}
@@ -258,8 +258,8 @@ public class TripPlanner<E> {
 	
 	/**
 	 * method to return the trips left to be planned
-	 * @param currentState
-	 * @return
+	 * @param currentState   trip planned so far
+	 * @return  remaining trips to travel
 	 */
 	
 	public ArrayList<Trip<E>> tripsleft(State<E> currentState){
@@ -295,7 +295,7 @@ public class TripPlanner<E> {
 	
 	/**
 	 * getter for trips list
-	 * @return
+	 * @return  the list of all trips need to be planned
 	 */
 	
 	public ArrayList<Trip<E>> getTrips(){

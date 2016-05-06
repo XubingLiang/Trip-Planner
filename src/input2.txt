@@ -1,0 +1,18 @@
+Transfer 35 London
+Transfer 159 City2
+Transfer 232 City3
+Transfer 208 City4
+Transfer 185 City5
+Time 223 London Paris
+Time 223 London France
+Time 100 London Poland
+Time 316 London Germany
+Time 200 Paris France
+Time 282 Paris Poland
+Time 412 Paris Germany
+Time 200 France Poland
+Time 223 France Germany
+Time 223 Poland Germany
+Trip Paris Poland
+Trip Poland France
+Trip London France

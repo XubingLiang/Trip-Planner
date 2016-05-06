@@ -1,18 +1,76 @@
-Transfer 35 London
-Transfer 159 City2
-Transfer 232 City3
-Transfer 208 City4
-Transfer 185 City5
-Time 223 London City2
-Time 223 London City3
-Time 100 London City4
-Time 316 London City5
-Time 200 City2 City3
-Time 282 City2 City4
-Time 412 City2 City5
-Time 200 City3 City4
-Time 223 City3 City5
-Time 223 City4 City5
-Trip City2 City4
-Trip City4 City3
-Trip London City3
+Transfer 1519 London
+Transfer 1774 City1
+Transfer 2687 City2
+Transfer 2057 City3
+Transfer 2299 City4
+Transfer 2710 City5
+Transfer 2832 City6
+Transfer 1208 City7
+Transfer 1665 City8
+Transfer 1969 City9
+Transfer 1488 City10
+Time 9465 City10 London
+Time 8806 City10 City1
+Time 7051 City10 City2
+Time 9000 City10 City3
+Time 8965 City10 City4
+Time 9696 City10 City5
+Time 9550 City10 City6
+Time 8738 City10 City7
+Time 7833 City10 City8
+Time 7376 City10 City9
+Time 8224 City9 London
+Time 9595 City9 City1
+Time 7649 City9 City2
+Time 8595 City9 City3
+Time 7905 City9 City4
+Time 9970 City9 City5
+Time 7696 City9 City6
+Time 8231 City9 City7
+Time 7711 City9 City8
+Time 9569 City8 London
+Time 7681 City8 City1
+Time 9231 City8 City2
+Time 9673 City8 City3
+Time 7255 City8 City4
+Time 7152 City8 City5
+Time 9065 City8 City6
+Time 7364 City8 City7
+Time 8547 City7 London
+Time 8037 City7 City1
+Time 9427 City7 City2
+Time 7121 City7 City3
+Time 9119 City7 City4
+Time 9401 City7 City5
+Time 7948 City7 City6
+Time 8623 City6 London
+Time 9253 City6 City1
+Time 9154 City6 City2
+Time 9770 City6 City3
+Time 9268 City6 City4
+Time 7772 City6 City5
+Time 8256 City5 London
+Time 8623 City5 City1
+Time 9929 City5 City2
+Time 7175 City5 City3
+Time 7721 City5 City4
+Time 8956 City4 London
+Time 8532 City4 City1
+Time 7241 City4 City2
+Time 9370 City4 City3
+Time 9006 City3 London
+Time 9070 City3 City1
+Time 8038 City3 City2
+Time 7066 City2 London
+Time 9623 City2 City1
+Time 8026 City1 London
+Trip City10 City1
+Trip City9 City3
+Trip City9 City6
+Trip City6 City5
+Trip City5 City3
+Trip City2 City9
+Trip City5 City9
+Trip City2 City7
+Trip City6 City7
+Trip London City6

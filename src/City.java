@@ -3,7 +3,7 @@ import java.util.ArrayList;
  * this Class store the information of a City and the Edge of this City
  * @author Xubing Liang
  *
- * @param <E>
+ * @param <E>  generic type
  */
 public class City<E>{
 	private E name;
@@ -12,9 +12,9 @@ public class City<E>{
 	
 	
 	/**
-	 * constructor of City<E>
-	 * @param name
-	 * @param transfer
+	 * constructor of City
+	 * @param name  name of city
+	 * @param transfer   transfer time
 	 */
 	
 	public City(E name,int transfer){
@@ -25,9 +25,9 @@ public class City<E>{
 	
 	/**
 	 * add edge to the city
-	 * @param from
-	 * @param to
-	 * @param cost
+	 * @param from  start City
+	 * @param to   end Citys
+	 * @param cost  travel cost
 	 */
 	
 	public void addEdge(City<E> from,City<E> to, int cost){
@@ -48,8 +48,8 @@ public class City<E>{
 	
 	/**
 	 * get the edge between two city
-	 * @param to
-	 * @return Edge<E>
+	 * @param to   destination
+	 * @return a Edge
 	 */
 	public Edge<E> getEdge(City<E> to){
 		for(Edge<E> e:edge){
@@ -71,8 +71,8 @@ public class City<E>{
 	
 	/**
 	 * get the edge cost to one exact city
-	 * @param to
-	 * @return 
+	 * @param to  destination
+	 * @return   the cost from one city to another city
 	 */
 
 	public int getEdgeCost(City<E> to){

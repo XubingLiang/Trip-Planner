@@ -42,8 +42,8 @@ public class LegitHeuristic<E> implements heuristic<E> {
 	/**
 	 * this method is to get the num of link trip that needed to be add to the whole 
 	 * trip, a link trip is the trip that are not required.
-	 * @param unvisited   unvisited trips
-	 * @param c      a city
+	 * @param unvisited
+	 * @param c
 	 * @return total number of link trip
 	 */
 	private int getnumofLinkTrip(ArrayList<Trip<E>> unvisited,City<E> c) {
@@ -74,7 +74,7 @@ public class LegitHeuristic<E> implements heuristic<E> {
 	
 	/**
 	 * this method is to get the total travel cost among the trips
-	 * @param trips  unvisited trips
+	 * @param trips
 	 * @return the travel time
 	 */
 
@@ -88,7 +88,7 @@ public class LegitHeuristic<E> implements heuristic<E> {
 	
 	/**
 	 * this is to get the remaining transfer among the required trips.
-	 * @param unvisited  unvisited trips
+	 * @param unvisited
 	 * @return return the remaining transfer time
 	 */
 	
@@ -103,7 +103,7 @@ public class LegitHeuristic<E> implements heuristic<E> {
 				end=0;
 			}
 			
-			transfer=transfer+start;
+			transfer=transfer+start+end;
 			
 		}
 			
