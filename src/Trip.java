@@ -15,6 +15,10 @@ public class Trip<E> {
 	}
 	
 	public void setCost(){
+		if(from==null){
+			cost=0;
+			return;
+		}
 		cost=from.getEdgeCost(to);
 	}
 	

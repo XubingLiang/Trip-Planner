@@ -1,0 +1,18 @@
+14853 nodes expanded
+cost = 9429
+Trip London to City9
+Trip City9 to City5
+Trip City5 to London
+Trip London to City7
+Trip City7 to City6
+Trip City6 to City9
+Trip City9 to City2
+Trip City2 to City7
+Trip City7 to City5
+Trip City5 to City2
+Trip City2 to City9
+Trip City9 to City2
+Trip City2 to City3
+Trip City3 to City2
+Trip City2 to City6
+Trip City6 to London

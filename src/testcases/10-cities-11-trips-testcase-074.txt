@@ -1,0 +1,66 @@
+Transfer 232 London
+Transfer 235 City2
+Transfer 145 City3
+Transfer 58 City4
+Transfer 40 City5
+Transfer 45 City6
+Transfer 51 City7
+Transfer 36 City8
+Transfer 14 City9
+Transfer 47 City10
+Time 800 London City2
+Time 721 London City3
+Time 1081 London City4
+Time 921 London City5
+Time 700 London City6
+Time 700 London City7
+Time 761 London City8
+Time 316 London City9
+Time 854 London City10
+Time 721 City2 City3
+Time 921 City2 City4
+Time 728 City2 City5
+Time 1063 City2 City6
+Time 100 City2 City7
+Time 860 City2 City8
+Time 509 City2 City9
+Time 943 City2 City10
+Time 360 City3 City4
+Time 223 City3 City5
+Time 412 City3 City6
+Time 670 City3 City7
+Time 141 City3 City8
+Time 509 City3 City9
+Time 223 City3 City10
+Time 200 City4 City5
+Time 632 City4 City6
+Time 905 City4 City7
+Time 360 City4 City8
+Time 854 City4 City9
+Time 316 City4 City10
+Time 600 City5 City6
+Time 707 City5 City7
+Time 300 City5 City8
+Time 670 City5 City9
+Time 316 City5 City10
+Time 989 City6 City7
+Time 300 City6 City8
+Time 670 City6 City9
+Time 316 City6 City10
+Time 806 City7 City8
+Time 412 City7 City9
+Time 894 City7 City10
+Time 600 City8 City9
+Time 100 City8 City10
+Time 700 City9 City10
+Trip City10 City2
+Trip City10 City6
+Trip City2 City3
+Trip City2 City6
+Trip City2 London
+Trip City3 City4
+Trip City4 City5
+Trip City7 City3
+Trip City8 City4
+Trip City9 London
+Trip London City4

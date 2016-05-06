@@ -1,0 +1,35 @@
+Transfer 75 London
+Transfer 216 City2
+Transfer 47 City3
+Transfer 141 City4
+Transfer 86 City5
+Transfer 162 City6
+Transfer 122 City7
+Time 600 London City2
+Time 100 London City3
+Time 500 London City4
+Time 509 London City5
+Time 223 London City6
+Time 640 London City7
+Time 608 City2 City3
+Time 360 City2 City4
+Time 141 City2 City5
+Time 538 City2 City6
+Time 412 City2 City7
+Time 565 City3 City4
+Time 538 City3 City5
+Time 141 City3 City6
+Time 707 City3 City7
+Time 223 City4 City5
+Time 583 City4 City6
+Time 141 City4 City7
+Time 500 City5 City6
+Time 300 City5 City7
+Time 721 City6 City7
+Trip City2 City3
+Trip City2 City6
+Trip City3 City2
+Trip City4 London
+Trip City5 City2
+Trip City5 London
+Trip City7 City4

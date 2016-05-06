@@ -1,0 +1,44 @@
+Instructions
+
+You may print debugging information as long as the debugging output does not look like your actual output.
+
+./runtests.pl
+
+	runs through all tests
+
+./runtests.pl p19
+./runtests.pl s-17p
+./runtests.pl fp input1.txt input2.txt
+
+	flags must be joined together
+
+
+./runtests.pl p
+
+	print input and output after every test
+
+./runtests.pl s
+
+	stop and wait after every test
+
+./runtests.pl f input1.txt output1.txt
+
+	run test on the specified file
+
+./runtests.pl 19
+
+	run test 19
+
+./runtests.pl 19-299
+
+	run tests 19 to 299 only
+
+./runtests.pl -299
+
+	run tests 1 to 299
+
+./runtests.pl 299-
+
+	run tests 299 to end
+
+

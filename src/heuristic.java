@@ -1,5 +1,5 @@
 import java.util.ArrayList;
 
 public interface heuristic<E> {
-	public int getEstimateHCost(ArrayList<Trip<E>> t, State<E> s,int cost);
+	public int getEstimateHCost(TripPlanner<E> t, State<E> s);
 }

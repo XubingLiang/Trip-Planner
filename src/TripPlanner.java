@@ -43,7 +43,7 @@ public class TripPlanner<E> {
 	        
 	          }
 	          planner.initStartCity();
-	          planner.test();
+	         // planner.test();
 	          planner.aStarSearch();
 	          planner.printresult();
 	      }
@@ -108,13 +108,6 @@ public class TripPlanner<E> {
 
 
 	
-	public int getTripsCost(){
-		int mincost=0;
-		for(Trip<E> e : trips){
-			mincost += e.getCost()+e.getFrom().getTransfer()+e.getTo().getTransfer();
-		}
-		return mincost;
-	}
 
 	public void test(){
 		System.out.println("start city is "+this.startCity.getName());
@@ -126,10 +119,8 @@ public class TripPlanner<E> {
 			System.out.println("");
 		}
 		for(Trip<E> t: this.trips){
-			System.out.println("From "+ t.getFrom().getName() +" to "+ t.getTo().getName());
-			
+			System.out.println("From "+ t.getFrom().getName() +" to "+ t.getTo().getName());			
 		}
-		System.out.println(this.getTripsCost());
 		
 		
 	}
@@ -152,50 +143,76 @@ public class TripPlanner<E> {
 		return null;
 	}
 	
-	
-	public void aStarSearch(){
-		State<E> iniState = new State<E>(this.startCity,0,null);
-		PriorityQueue<State<E>> stateQueue = new PriorityQueue<State<E>>();
-		int cost=this.getTripsCost();
-		iniState.sethCost(h.getEstimateHCost(this.trips,iniState,cost));
-		iniState.setfCost();
-		//System.out.println(iniState.getfCost());
-		stateQueue.add(iniState);
-		int nodes=0;
-		while(stateQueue.size()>0){
-			State<E> currentState=stateQueue.poll();
-			nodes++;
-			if(currentState.getPstate()!=null){
-				System.out.println(currentState.getfCost());
-				currentState.printCurrentPathAndCosts();
-			}
-			if(tripsfound(currentState)){
-				this.setFinalState(currentState);
-				this.setNnodes(nodes);
-				break;
-			}
-			for(City<E> e:currentState.getCurrentNode().getConnected()){
-				if(currentState.getPstate()==null){					
-					State<E> newState = new State<E>(e,currentState.getgCost()+
-									currentState.getCurrentNode().getEdge(e).getCost(),currentState);
-					newState.sethCost(h.getEstimateHCost(this.trips,newState,cost));
-					newState.setfCost();
-					stateQueue.add(newState);
-				} else {
-					State<E> newState = new State<E>(e,currentState.getgCost()+currentState.getCurrentNode().getTransfer()+
-							currentState.getCurrentNode().getEdge(e).getCost(),currentState);
-					newState.sethCost(h.getEstimateHCost(this.trips,newState,cost));
-					newState.setfCost();
-					//System.out.println(newState.getfCost());
-					stateQueue.add(newState);
+	public int closestEdge(){
+		int cost=cities.get(0).getEdge().get(0).getCost();
+		for(City<E> c: cities){
+			for(Edge<E> e: c.getEdge()){
+				if(e.getCost()<cost){
+					cost=e.getCost();
 				}
 			}
 		}
+		return cost;
 	}
 	
-	public boolean tripsfound(State<E> currentState){
+	
+	public void aStarSearch(){
+		State<E> iniState = new State<E>(this.startCity,0,null);
+		PriorityQueue<State<E>> states = new PriorityQueue<State<E>>();
+		//PriorityQueue<State<E>> tempstates=new PriorityQueue<State<E>>();
+		State<E> tmpState;
+		iniState.sethCost(h.getEstimateHCost(this,iniState));
+		iniState.setfCost();
+		states.add(iniState);
+		int nodes=0;
+		int cost=0;
+		while(states.size()>0){
+			State<E> current=states.poll();
+			nodes++;
+			ArrayList<Trip<E>> unvisitedtrips=new ArrayList<Trip<E>>();
+			unvisitedtrips=tripsleft(current);
+			if(unvisitedtrips.size()==0){
+				current.setgCost(current.getgCost()-current.getCurrentNode().getTransfer());
+				this.setFinalState(current);
+				this.setNnodes(nodes);
+				break;
+			}
+			for(Trip<E> trip : unvisitedtrips ){
+				City<E> from = trip.getFrom();
+				City<E> to =trip.getTo();
+				State<E> newState;
+				if(current.getCurrentNode()==from){
+					cost=current.getgCost()+current.getCurrentNode().getEdgeCost(to)+to.getTransfer();
+					newState=new State<E>(to,cost,current);
+					newState.sethCost(h.getEstimateHCost(this,newState));
+					newState.setfCost();
+					states.add(newState);
+				} else if (current.getCurrentNode() != from){
+					cost=current.getgCost()+current.getCurrentNode().getEdgeCost(from)+from.getTransfer();
+					newState=new State<E>(from,cost,current);
+					cost=newState.getgCost()+newState.getCurrentNode().getEdgeCost(to)
+						 +to.getTransfer();
+					tmpState=newState;
+					newState=new State<E>(to,cost,tmpState);
+					newState.sethCost(h.getEstimateHCost(this,newState));
+					newState.setfCost();
+					states.add(newState);
+				}
+			
+				
+			}
+			
+			
+			
+		}
+
+
+
+
+	}
+	
+	public ArrayList<Trip<E>> tripsleft(State<E> currentState){
 		ArrayList<Trip<E>> triplist=this.copylist();		
-		Boolean found=false;
 		int i=0;
 		while(currentState.getPstate() !=null){
 			i=0;
@@ -212,17 +229,17 @@ public class TripPlanner<E> {
 			}
 		}
 		
-		if(triplist.size()==0){
-			found=true;
-		}
-		
-		return found;
+		return triplist;
 	}
 	
 	public void printresult(){
 		System.out.print(this.nnodes+" nodes expanded\n");
 		State<E> s = this.finalState;
 		s.printCurrentPathAndCosts();
+	}
+	
+	public ArrayList<Trip<E>> getTrips(){
+		return this.trips;
 	}
 
 	

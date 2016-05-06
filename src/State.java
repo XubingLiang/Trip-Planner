@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 
 public class State<E> implements Comparable<State<E>>{
-	private Trip<E> currentTrip;
+	//private Trip<E> currentTrip;
 	private City<E> currentNode;
 	private State<E> pState;
 	private int gCost;
 	private int hCost;
 	private int fCost;
 	
-	public State(City<E> node, int costsoFar, State<E> pState){
-		this.currentNode=node;
+	public State(City<E> city, int costsoFar, State<E> pState){
+		this.currentNode=city;
 		this.pState=pState;
 		this.gCost=costsoFar;
 	}
@@ -18,6 +18,7 @@ public class State<E> implements Comparable<State<E>>{
 		String toPrint = getPathString("");
 		System.out.println(toPrint);
 	}
+	
 	
 	private String getPathString(String s){
 		String returnString =this.currentNode.getName().toString().concat(s);
@@ -33,22 +34,6 @@ public class State<E> implements Comparable<State<E>>{
 		System.out.println("Cost = " + this.getgCost() + "\n"+toPrint);
 	}
 	
-	public ArrayList<Trip<E>> gettripsinState(State<E> s){
-		ArrayList<Trip<E>> temp=new ArrayList<Trip<E>>();
-		if(s.getPstate()==null){
-			return temp;
-		} else {
-		while(s.getPstate() !=null){
-			City<E> to=s.getCurrentNode();
-			City<E> from=s.getPstate().getCurrentNode();
-			s=s.getPstate();
-			Trip<E> t=new Trip<E>(from,to);
-			temp.add(t);
-		}
-		}
-		return temp;
-	}
-
 	
 	public City<E> getCurrentNode() {
 		return currentNode;
