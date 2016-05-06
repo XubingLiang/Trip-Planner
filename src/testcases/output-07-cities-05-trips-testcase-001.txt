@@ -1,9 +1,0 @@
-11 nodes expanded
-cost = 2520
-Trip London to City6
-Trip City6 to London
-Trip London to City7
-Trip City7 to London
-Trip London to City2
-Trip City2 to City3
-Trip City3 to City7
