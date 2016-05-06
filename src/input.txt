@@ -1,19 +1,18 @@
-Transfer 60 London             
-Transfer 40 Paris             
-Transfer 40 Berlin            
-Transfer 60 Amsterdam         
-Transfer 80 Brussels           
-Time 180 London Paris          
-Time 240 London Berlin         
-Time 180 London Amsterdam      
-Time 100 London Brussels      
-Time 100 Paris Berlin          
-Time 240 Paris Amsterdam      
-Time 120 Paris Brussels        
-Time 240 Berlin Amsterdam      
-Time 220 Berlin Brussels       
-Time 200 Amsterdam Brussels    
-Trip Berlin Amsterdam          
-Trip Paris Berlin             
-Trip London Amsterdam
-Trip London Brussels 
+Transfer 35 London
+Transfer 159 City2
+Transfer 232 City3
+Transfer 208 City4
+Transfer 185 City5
+Time 223 London City2
+Time 223 London City3
+Time 100 London City4
+Time 316 London City5
+Time 200 City2 City3
+Time 282 City2 City4
+Time 412 City2 City5
+Time 200 City3 City4
+Time 223 City3 City5
+Time 223 City4 City5
+Trip City2 City4
+Trip City4 City3
+Trip London City3

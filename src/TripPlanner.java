@@ -4,6 +4,16 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
+
+/**
+ * TripPlanner class store information of map, and plan the trip
+ * that required
+ * taking control of use input and return planned trip to user
+ *
+ * @author Xubing Liang
+ *
+ * @param <E>
+ */
 public class TripPlanner<E> {
 	
 	private ArrayList<City<E>> cities ;
@@ -11,14 +21,20 @@ public class TripPlanner<E> {
 	private ArrayList<Trip<E>> trips;
 	private int nnodes;
 	private City<E> startCity;
-	private BasicHeuristic<E> h=new BasicHeuristic<E>();
+	private LegitHeuristic<E> h=new LegitHeuristic<E>();
 	
+	/**
+	 * constructor for Tripplanner
+	 */
 	public TripPlanner (){
 		cities=new ArrayList<City<E>>();
 		trips=new ArrayList<Trip<E>>();
 	}
 	
-	
+	/**
+	 * the main function
+	 * @param args
+	 */
 	public static void main(String[] args){
 		Scanner sc = null;
 		String[] input;
@@ -42,8 +58,7 @@ public class TripPlanner<E> {
 	        	  }	     
 	        
 	          }
-	          planner.initStartCity();
-	         // planner.test();
+	          planner.initStartCity();	         
 	          planner.aStarSearch();
 	          planner.printresult();
 	      }
@@ -56,14 +71,28 @@ public class TripPlanner<E> {
 	      }	      
 	}
 	
+	/**
+	 * method to initialize City information
+	 * @param n
+	 */
+	
 	public void cityInit(City<E> n){
 		this.cities.add(n);
 	}
 		
+	/**
+	 * method to add required trip
+	 * @param t
+	 */
 	private void addtrip(Trip<E> t) {
 		trips.add(t);
 		
 	}
+	
+	/**
+	 * method to add connection between two cities
+	 * @param input
+	 */
 	
 	private void addconnection(String[] input) {
 		int cost=Integer.parseInt(input[1]);
@@ -75,19 +104,28 @@ public class TripPlanner<E> {
 	
 
 
-
+	/**
+	 * method to initialize the startcity.
+	 */
 	public void initStartCity(){
 		City<E> start = this.getaCity("London");
 		this.setStartCity(start);
 	}
 	
-	
+	/**
+	 * method to set the start city
+	 * @param start
+	 */
 	private void setStartCity(City<E> start) {
 		this.startCity=start;
 		
 	}
 
 	
+	/**
+	 * method to copy the whole required list 
+	 * @return a list of trips
+	 */
 	
 	public ArrayList<Trip<E>> copylist(){
 		ArrayList<Trip<E>> triplist=new ArrayList<Trip<E>>();
@@ -97,42 +135,39 @@ public class TripPlanner<E> {
 		return triplist;
 	}
 	
+	/**
+	 * method to set how many nodes expanded for the search
+	 * @param nnodes
+	 */
 	public void setNnodes(int nnodes) {
 		this.nnodes = nnodes;
 	}
+	
+	/**
+	 * set the final state
+	 * @param currentState
+	 */
 
 	public void setFinalState(State<E> currentState) {
 		this.finalState = currentState;
 	}
 	
-
-
-	
-
-	public void test(){
-		System.out.println("start city is "+this.startCity.getName());
-		for(City<E> c: this.cities){
-			System.out.println("conntection of "+c.getName());
-			for(Edge<E> e:c.getEdge()){
-				System.out.println("from " + e.getFrom().getName()+" to "+e.getTo().getName()+" cost is "+e.getCost());
-			}
-			System.out.println("");
-		}
-		for(Trip<E> t: this.trips){
-			System.out.println("From "+ t.getFrom().getName() +" to "+ t.getTo().getName());			
-		}
-		
-		
-	}
-
-
-
-
-
+	/**
+	 * method to initialize an edge
+	 * @param from
+	 * @param to
+	 * @param c
+	 */
 
 	public void addEdge(City<E> from, City<E> to, int c) {
 		from.addEdge(from, to, c);
 	}
+	
+	/**
+	 * method to get a city by name
+	 * @param name
+	 * @return
+	 */
 	
 	public City<E> getaCity(String name){
 		for(City<E> c: cities){
@@ -143,9 +178,14 @@ public class TripPlanner<E> {
 		return null;
 	}
 	
+	/**
+	 * return the cheapest cost of a edge in the map
+	 * @return
+	 */
+	
 	public int closestEdge(){
 		int cost=cities.get(0).getEdge().get(0).getCost();
-		for(City<E> c: cities){
+		for(City<E> c: this.cities){
 			for(Edge<E> e: c.getEdge()){
 				if(e.getCost()<cost){
 					cost=e.getCost();
@@ -154,6 +194,10 @@ public class TripPlanner<E> {
 		}
 		return cost;
 	}
+	
+	/**
+	 * method to search the whole map to get trips planned
+	 */
 	
 	
 	public void aStarSearch(){
@@ -173,6 +217,7 @@ public class TripPlanner<E> {
 			unvisitedtrips=tripsleft(current);
 			if(unvisitedtrips.size()==0){
 				current.setgCost(current.getgCost()-current.getCurrentNode().getTransfer());
+				current.setfCost();
 				this.setFinalState(current);
 				this.setNnodes(nodes);
 				break;
@@ -211,6 +256,12 @@ public class TripPlanner<E> {
 
 	}
 	
+	/**
+	 * method to return the trips left to be planned
+	 * @param currentState
+	 * @return
+	 */
+	
 	public ArrayList<Trip<E>> tripsleft(State<E> currentState){
 		ArrayList<Trip<E>> triplist=this.copylist();		
 		int i=0;
@@ -232,11 +283,20 @@ public class TripPlanner<E> {
 		return triplist;
 	}
 	
+	/**
+	 * print the final result out
+	 */
+	
 	public void printresult(){
 		System.out.print(this.nnodes+" nodes expanded\n");
 		State<E> s = this.finalState;
 		s.printCurrentPathAndCosts();
 	}
+	
+	/**
+	 * getter for trips list
+	 * @return
+	 */
 	
 	public ArrayList<Trip<E>> getTrips(){
 		return this.trips;
